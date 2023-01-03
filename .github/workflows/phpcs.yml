@@ -14,4 +14,4 @@ jobs:
         uses: chindit/actions-phpcs@master
         with:
           # Folder to check code style
-          dir: src/
+          dir: .
