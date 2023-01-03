@@ -6,7 +6,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     container:
-      image: php:8.2-fpm
+      image: php:8.2.0-fpm
       env:
         NODE_ENV: production
       ports:
