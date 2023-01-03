@@ -1,7 +1,5 @@
 name: CI Build
 on: push
-
-name: Inspections
 jobs:
   runPHPCSInspection:
     name: Run PHPCS inspection
