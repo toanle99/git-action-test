@@ -20,7 +20,7 @@ jobs:
 
     - name: Run PHPCS Coding Standards
       run: |
-        /home/runner/.composer/vendor/bin/phpcs $GITHUB_WORKSPACE
+        /home/runner/vendor/bin/phpcs $GITHUB_WORKSPACE
 
     - name: Create a built branch
       run: |
