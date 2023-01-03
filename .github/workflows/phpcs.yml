@@ -14,14 +14,6 @@ jobs:
       with:
         version: 12
 
-    - name: Run yarn install
-      run: |
-        yarn install
-
-    - name: Run yarn build
-      run: |
-        yarn run build --if-present
-
     - name: Run composer install
       run: |
         composer install --prefer-dist
