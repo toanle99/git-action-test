@@ -1,0 +1,53 @@
+
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: laravel-bootstrap
+        uid: 10000
+      context: ./
+      dockerfile: Dockerfile
+    image: laravel-bootstrap-image
+    ports:
+      - 8090:8090
+    container_name: laravel-bootstrap-app
+    restart: unless-stopped
+    working_dir: /www/
+    volumes:
+      - ./:/www
+    networks:
+      - landing
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - 9000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - landing
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "33070:3307"
+    container_name: laravel-bootstrap-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ALLOW_EMPTY_PASSWDB_HOSTORD: 1
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - landing
+networks:
+  landing:
+    driver: bridge
