@@ -9,6 +9,39 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v1
 
-    - name: Show files
+    - name: Set Node version to 12
+      uses: actions/setup-node@v1
+      with:
+        version: 12
+
+    - name: Run yarn install
       run: |
-        ls -la
+        yarn install
+
+    - name: Run yarn build
+      run: |
+        yarn run build --if-present
+
+    - name: Run composer install
+      run: |
+        composer install --prefer-dist
+
+    - name: Install PHPCS with WordPress Coding Standards
+      run: |
+        composer global require dealerdirect/phpcodesniffer-composer-installer:0.5.0 wp-coding-standards/wpcs:2.1.1 automattic/vipwpcs:2.0.0
+
+    - name: Run PHPCS Coding Standards
+      run: |
+        /home/runner/.composer/vendor/bin/phpcs $GITHUB_WORKSPACE
+
+    - name: Create a built branch
+      run: |
+        BRANCH_NAME=$(echo $GITHUB_REF | grep -oP '(?<=refs\/heads\/).*')
+        rm .gitignore
+        mv .deployignore .gitignore
+        git config --global user.email "ci@company.com"
+        git config --global user.name "Company CI"
+        git remote set-url origin https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git
+        git checkout -b $BRANCH_NAME-built
+        git add -A && git commit -m "built from $GITHUB_SHA"
+        git push --force -u origin $BRANCH_NAME-built
