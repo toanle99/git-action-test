@@ -26,3 +26,5 @@ jobs:
           standard: phpcs.xml
       - name: Check coding standards
         run: vendor/bin/phpcs
+      - name: Detect coding standard violations
+        run: vendor/bin/phpcs -q --report=checkstyle | cs2pr --graceful-warnings
