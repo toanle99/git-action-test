@@ -22,4 +22,4 @@ jobs:
 
       - name: Run PHPCS Coding Standards
         run: |
-          ~/.composer/vendor/bin/phpcs $GITHUB_WORKSPACE
+          ./vendor/bin/phpcs $GITHUB_WORKSPACE
