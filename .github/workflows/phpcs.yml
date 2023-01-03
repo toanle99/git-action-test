@@ -1,35 +1,20 @@
 name: CI Build
-on: [push]
+on: push
 
+name: Inspections
 jobs:
-  build:
-    name: Build
+  runPHPCSInspection:
+    name: Run PHPCS inspection
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v1
-
-    - name: Set Node version to 12
-      uses: actions/setup-node@v1
+    - uses: actions/checkout@v2
       with:
-        version: 12
-
-    - name: Run composer install
-      run: |
-        composer install --prefer-dist
-
-    - name: Run PHPCS Coding Standards
-      run: |
-        /vendor/bin/phpcs $GITHUB_WORKSPACE
-
-    - name: Create a built branch
-      run: |
-        BRANCH_NAME=$(echo $GITHUB_REF | grep -oP '(?<=refs\/heads\/).*')
-        rm .gitignore
-        mv .deployignore .gitignore
-        git config --global user.email "ci@company.com"
-        git config --global user.name "Company CI"
-        git remote set-url origin https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git
-        git checkout -b $BRANCH_NAME-built
-        git add -A && git commit -m "built from $GITHUB_SHA"
-        git push --force -u origin $BRANCH_NAME-built
+        ref: ${{ github.event.pull_request.head.sha }}
+    - name: Run PHPCS inspection
+      uses: rtCamp/action-phpcs-code-review@v2
+      env:
+        GH_BOT_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
+        SKIP_FOLDERS: "tests,.github"
+        PHPCS_SNIFFS_EXCLUDE: "WordPress.Files.FileName"
+      with:
+        args: "WordPress,WordPress-Core,WordPress-Docs"
