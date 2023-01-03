@@ -22,7 +22,7 @@ jobs:
           curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
           php phpcs.phar --version
       coverage: none
-          tools: composer, cs2pr
+          tools: composer
 
       - name: Get Composer cache directory
         id: composer-cache
