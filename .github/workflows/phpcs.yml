@@ -5,23 +5,6 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    container:
-      image: php:7.3-apache
-      env:
-        NODE_ENV: production
-      ports:
-      - 80
-      volumes:
-      - $GITHUB_WORKSPACE:/nas/content/live/bigbitev3
-    services:
-      mysql:
-        image: mysql:5.7.27
-        env:
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-        - 3306
-        volumes:
-        - $HOME/mysql:/var/lib/mysql
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v1
