@@ -19,4 +19,4 @@ jobs:
         run: ./vendor/bin/phpcs --report=checkstyle -q | cs2pr --graceful-warnings
 
       - name: Run QA Scripts from composer.json
-      run: composer qa
+        run: composer qa
