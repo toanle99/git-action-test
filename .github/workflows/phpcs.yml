@@ -16,5 +16,5 @@ jobs:
         run: composer install
 
       - name: Run PHP Codesniffer
-        run: vendor/bin/phpcs
+        run: ./vendor/bin/phpcs
 
