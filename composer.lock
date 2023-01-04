@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c55bf4a0420cc24e442699e2e2ce016d",
+    "content-hash": "ee04f6a4d382ec773bd8878a418bd706",
     "packages": [
         {
             "name": "brick/math",
@@ -6019,16 +6019,6 @@
                 }
             ],
             "time": "2023-01-03T12:54:54+00:00"
-        },
-        {
-            "name": "pfrenssen/phpcs-pre-push",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://gist.github.com/498fc52fea3f965f6640.git",
-                "reference": "master"
-            },
-            "type": "library"
         },
         {
             "name": "phar-io/manifest",
