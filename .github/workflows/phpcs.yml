@@ -1,19 +1,19 @@
-name: "CI"
+on: push
 
-on: [push]
+name: Inspections
 jobs:
-  phpcs:
+  runPHPCSInspection:
+    name: Run PHPCS inspection
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.3.4
-      - uses: shivammathur/setup-php@2.15.0
-        with:
-          php-version: 8.1
-          coverage: none
-          tools: cs2pr
-
-      - name: Install dependencies
-        run: composer install
-
-      - name: Run PHP Codesniffer
-        run: vendor/bin/phpcs --help | vendor/bin/phpcs --report=checkstyle -q | cs2pr --graceful-warnings
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.push.head.sha }}
+    - name: Run PHPCS inspection
+      uses: rtCamp/action-phpcs-code-review@v2
+      env:
+        GH_BOT_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
+        SKIP_FOLDERS: "tests,.github"
+        PHPCS_SNIFFS_EXCLUDE: "WordPress.Files.FileName"
+      with:
+        args: "WordPress,WordPress-Core,WordPress-Docs"
