@@ -7,14 +7,11 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UserTest extends TestCase
-{ 
-
-    /** @test */
+{
     public function test_login()
     {
         $response = $this->get(route('user.login'));
 
-        $response->assertStatus(200); 
+        $response->assertStatus(200);
     }
-    
 }

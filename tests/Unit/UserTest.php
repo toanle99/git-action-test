@@ -1,9 +1,9 @@
 <?php
- 
+
 use App\Models\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
- 
+
 class UserTest extends TestCase
 {
     use RefreshDatabase;
@@ -16,7 +16,7 @@ class UserTest extends TestCase
     {
         $this->assertTrue(true);
     }
- 
+
     //test create tài khoản
     public function testCreateUser()
     {
@@ -27,20 +27,20 @@ class UserTest extends TestCase
         ]);
         $this->assertEquals(1, count(array($user)));
     }
-  
+
     //test register user
     public function testCanRegister()
     {
         $this->assertGuest();
         $user = User::factory()->create();
-        $response = $this->post('/user/register', [ 
+        $response = $this->post('/user/register', [
         'email' => $user->email,
-        'password' => '12345678', 
+        'password' => '12345678',
         ]);
         $response->assertStatus(302)->assertSessionHasErrors('email');
         $this->withoutMiddleware()->assertGuest();
     }
- 
+
     //test đăng nhập thành công
     public function testSuccessfulLogin()
     {
@@ -49,11 +49,8 @@ class UserTest extends TestCase
            'password' => bcrypt('12345678'),
         ]);
         $loginData = ['email' => 'toan99@test.com', 'password' => '12345678'];
- 
-        $this->post('/user/login',$loginData)->assertStatus(302)
+        $this->post('/user/login', $loginData)->assertStatus(302)
         ->assertRedirect('/');
         $this->assertAuthenticated();
     }
- 
-      
 }
