@@ -16,7 +16,5 @@ jobs:
         run: composer install
 
       - name: Run PHP Codesniffer
-        run: ./vendor/bin/phpcs --report=checkstyle -q | cs2pr --graceful-warnings
+        run: ./vendor/bin/phpcs
 
-      - name: Run QA Scripts from composer.json
-        run: composer qa
