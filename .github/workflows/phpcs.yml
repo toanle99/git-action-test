@@ -1,6 +1,7 @@
 name: WPCS checker
 on: push
-phpcs:
+jobs:
+  phpcs:
     runs-on: ubuntu-latest
 
     steps:
