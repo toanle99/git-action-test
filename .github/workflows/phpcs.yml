@@ -1,7 +1,7 @@
 name: "CI"
 
 on: [push]
-jobs: 
+jobs:
   phpcs:
     runs-on: ubuntu-latest
     steps:
@@ -16,4 +16,4 @@ jobs:
         run: composer install
 
       - name: Run PHP Codesniffer
-        run: vendor/bin/phpcs --report=checkstyle -q | cs2pr --graceful-warnings
+        run: ./vendor/bin/phpcs --report=checkstyle -q | cs2pr --graceful-warnings
