@@ -15,8 +15,6 @@ jobs:
         with:
           fetch-depth: 0 # important!
 
-      # we may use whatever way to install phpcs, just specify the path on the next step
-      # however, curl seems to be the fastest
       - name: Install PHP_CodeSniffer
         run: |
           curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
@@ -27,3 +25,18 @@ jobs:
           files: "**.php" # you may customize glob as needed
           phpcs_path: php phpcs.phar
           standard: phpcs.xml
+  phpcs2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - uses: shivammathur/setup-php@2.15.0
+        with:
+          php-version: 8.2
+          coverage: none
+          tools: cs2pr
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Run PHP Codesniffer
+        run: vendor/bin/phpcs --report=checkstyle -q | cs2pr --graceful-warnings
