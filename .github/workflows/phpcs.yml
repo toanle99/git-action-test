@@ -1,7 +1,7 @@
 name: php-cs-fixer
 
 on:
-  [push]
+  push
 
 jobs:
   php-cs-fixer:
