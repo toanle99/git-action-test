@@ -8,27 +8,27 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('admin.user.index');
+        // return view('admin.user.index');
     }
 
     public function register()
     {
-        return view('admin.user.register');
+        // return view('admin.user.register');
     }
 
     public function login()
     {
-        if (isset($_POST) && isset($_POST['email']) && isset($_POST['password'])) {
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            User::where('email', $email)->where('password', $password);
-            return view();
-        }
-        return view('admin.user.index');
+        // if (isset($_POST) && isset($_POST['email']) && isset($_POST['password'])) {
+        //     $email = $_POST['email'];
+        //     $password = $_POST['password'];
+        //     User::where('email', $email)->where('password', $password);
+        //     return view();
+        // }
+        // return view('admin.user.index');
     }
 
     public function frofile()
     {
-        return '';
+        // return '';
     }
 }

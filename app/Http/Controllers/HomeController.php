@@ -2,8 +2,18 @@
 
 namespace App\Http\Controllers;
 
+/**
+ * Show the application dashboard.
+ *
+ * @return \Illuminate\Contracts\Support\Renderable
+ */
 use Illuminate\Http\Request;
 
+/**
+ * Show the application dashboard.
+ *
+ * @return \Illuminate\Contracts\Support\Renderable
+ */
 class HomeController extends Controller
 {
     /**
